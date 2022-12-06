@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { View, Text, SafeAreaView, StatusBar } from 'react-native'
+import { View, Text, StatusBar } from 'react-native'
 import { useDispatch } from 'react-redux';
 
 import { routes } from '../../../services'
@@ -19,7 +19,7 @@ const SignupScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]} >
+    <View style={[styles.container, { backgroundColor: theme.background }]} >
       <StatusBar backgroundColor={theme.background} barStyle={theme.theme === 'dark' ? 'light-content' : 'dark-content'} />
       <Header title={'Signup '} />
       <View style={[styles.wrapper, { backgroundColor: theme.background }]}>
@@ -31,7 +31,7 @@ const SignupScreen = ({ navigation }) => {
           <Button onPress={() => navigation.navigate(routes.login)}>Login</Button>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 

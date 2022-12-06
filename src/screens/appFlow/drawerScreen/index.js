@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import ToggleSwitch from 'toggle-switch-react-native';
-import { View, Text, TouchableOpacity, Image, SafeAreaView } from 'react-native';
+import { Text, TouchableOpacity, Image, View } from 'react-native';
 import { DrawerActions } from '@react-navigation/native'
 import { EventRegister } from 'react-native-event-listeners';
 import { useDispatch } from 'react-redux';
@@ -20,7 +20,7 @@ const DrawerScreen = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: theme.background }}>
+        <View style={{ flex: 1, backgroundColor: theme.background }}>
             <View style={{ flex: 1, backgroundColor: theme.background, padding: wp(5) }}>
                 <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
                     <Image source={appIcons.cross} style={{ height: 19, width: 19, tintColor: theme.theme === 'dark' ? colors.white : colors.black }} resizeMode={"contain"} />
@@ -43,7 +43,7 @@ const DrawerScreen = ({ navigation }) => {
                     <Text style={{ color: theme.color, fontSize: 16 }}>Logout</Text>
                 </TouchableOpacity>
             </View>
-        </SafeAreaView>
+        </View>
     )
 }
 

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { View, Text, SafeAreaView, StatusBar } from 'react-native'
+import { View, Text, StatusBar } from 'react-native'
 import { useSelector } from 'react-redux'
 
 import { routes } from '../../../services'
@@ -22,12 +22,12 @@ const Splash = ({ navigation }) => {
     )
   }
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <StatusBar backgroundColor={theme.background} barStyle={theme.theme === 'dark' ? 'light-content' : 'dark-content'} />
       <View style={styles.wrapper}>
         <Text style={{ color: theme.color, fontSize: 20 }}>Splash screen</Text>
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 
