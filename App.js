@@ -7,6 +7,7 @@ LogBox.ignoreLogs(['Warning: ...']);
 LogBox.ignoreAllLogs();
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
+import './src/i18Next'
 class App extends Component {
 
   render() {

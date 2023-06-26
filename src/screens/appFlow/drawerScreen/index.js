@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import ToggleSwitch from 'toggle-switch-react-native';
-import { Text, TouchableOpacity, Image, View } from 'react-native';
+import { Text, TouchableOpacity, Image, View, I18nManager } from 'react-native';
 import { DrawerActions } from '@react-navigation/native'
 import { EventRegister } from 'react-native-event-listeners';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import RNRestart from 'react-native-restart'
 
 import { appIcons, colors, hp, routes, wp } from '../../../services';
 import { userSave } from '../../../redux/Slices/splashSlice';
@@ -13,10 +15,18 @@ import themeContext from '../../../services/config/themeContext';
 const DrawerScreen = ({ navigation }) => {
     const theme = useContext(themeContext)
     const dispatch = useDispatch()
+    const { t, i18n } = useTranslation();
 
     const handleLogout = async () => {
         dispatch(userSave(null))
         navigation.replace(routes.auth)
+    }
+
+    const changeLang = () => {
+        i18n.changeLanguage(i18n.language === 'en' ? 'ur' : 'en').then(() => {
+            RNRestart.Restart()
+            I18nManager.forceRTL(i18n.language === 'ur')
+        })
     }
 
     return (
@@ -26,9 +36,9 @@ const DrawerScreen = ({ navigation }) => {
                     <Image source={appIcons.cross} style={{ height: 19, width: 19, tintColor: theme.theme === 'dark' ? colors.white : colors.black }} resizeMode={"contain"} />
                 </TouchableOpacity>
                 <View style={{ paddingTop: hp(10), flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ color: theme.color, fontSize: 16 }}>Dark Mode</Text>
+                    <Text style={{ color: theme.color, fontSize: 16 }}>{t('Dark Mode')}</Text>
                     <ToggleSwitch
-                        isOn={theme.theme === 'dark' ? true : false}
+                        isOn={theme.theme === 'dark'}
                         onColor={colors.green}
                         offColor={colors.lightBlack}
                         labelStyle={{ display: 'none' }}
@@ -39,8 +49,19 @@ const DrawerScreen = ({ navigation }) => {
                         }
                     />
                 </View>
+                <View style={{ paddingTop: hp(2), flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={{ color: theme.color, fontSize: 16 }}>{t('Urdu')}</Text>
+                    <ToggleSwitch
+                        isOn={i18n.language === 'ur'}
+                        onColor={colors.green}
+                        offColor={colors.lightBlack}
+                        labelStyle={{ display: 'none' }}
+                        size='small'
+                        onToggle={() => changeLang()}
+                    />
+                </View>
                 <TouchableOpacity onPress={() => handleLogout()} style={{ paddingTop: hp(5) }}>
-                    <Text style={{ color: theme.color, fontSize: 16 }}>Logout</Text>
+                    <Text style={{ color: theme.color, fontSize: 16 }}>{t('Logout')}</Text>
                 </TouchableOpacity>
             </View>
         </View>
